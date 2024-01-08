@@ -1,6 +1,4 @@
-# based on: https://github.com/gyf304/partylan/blob/2f8676b688cb181316409139d457762a836a96de/cmake/Steamworks.cmake
-
-set (steamworks_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/sdk")
+set (steamworks_SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/sdk")
 
 set (Steamworks_INCLUDE_DIR "${steamworks_SOURCE_DIR}/public/steam")
 
