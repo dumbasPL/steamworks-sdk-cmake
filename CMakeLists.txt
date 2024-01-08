@@ -1,0 +1,25 @@
+# based on: https://github.com/gyf304/partylan/blob/2f8676b688cb181316409139d457762a836a96de/cmake/Steamworks.cmake
+
+set (steamworks_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/sdk")
+
+set (Steamworks_INCLUDE_DIR "${steamworks_SOURCE_DIR}/public/steam")
+
+if (WIN32)
+	if ("${CMAKE_GENERATOR_PLATFORM}" STREQUAL "x64")
+		set (Steamworks_REDISTRIBUTABLE "${steamworks_SOURCE_DIR}/redistributable_bin/win64/steam_api64.dll")
+		set (Steamworks_REDISTRIBUTABLE_DIR "${steamworks_SOURCE_DIR}/redistributable_bin/win64")
+		set (Steamworks_IMPLIB "${steamworks_SOURCE_DIR}/redistributable_bin/win64/steam_api64.lib")
+	elseif ("${CMAKE_GENERATOR_PLATFORM}" STREQUAL "Win32")
+		set (Steamworks_REDISTRIBUTABLE "${steamworks_SOURCE_DIR}/redistributable_bin/steam_api.dll")
+		set (Steamworks_REDISTRIBUTABLE_DIR "${steamworks_SOURCE_DIR}/redistributable_bin")
+		set (Steamworks_IMPLIB "${steamworks_SOURCE_DIR}/redistributable_bin/steam_api.lib")
+	else()
+		message(FATAL_ERROR "Unsupported platform: ${CMAKE_GENERATOR_PLATFORM}")
+	endif()
+	add_library(Steamworks SHARED IMPORTED)
+	set_target_properties(Steamworks PROPERTIES IMPORTED_LOCATION "${Steamworks_REDISTRIBUTABLE}")
+	set_target_properties(Steamworks PROPERTIES IMPORTED_IMPLIB "${Steamworks_IMPLIB}")
+	target_include_directories(Steamworks INTERFACE "${Steamworks_INCLUDE_DIR}")
+else()
+	message(FATAL_ERROR "Unsupported platform: ${CMAKE_GENERATOR_PLATFORM}")
+endif()
