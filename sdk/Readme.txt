@@ -1,12 +1,85 @@
 ================================================================
 
-Copyright © 1996-2022, Valve Corporation, All rights reserved.
+Copyright © 1996-2024, Valve Corporation, All rights reserved.
 
 ================================================================
 
 
 Welcome to the Steamworks SDK.  For documentation please see our partner 
 website at: http://partner.steamgames.com
+
+
+----------------------------------------------------------------
+v1.62 14th March 2025
+----------------------------------------------------------------
+
+ISteamFriends:
+* Removed SetPersonaName() and GetUserRestrictions().
+
+ISteamHTMLSurface:
+* Renamed EMouseCursor to EHTMLMouseCursor, and renamed values to match.
+
+ISteamRemotePlay:
+* Removed BStartRemotePlayTogether() since it's always available when a supported game launches.
+* Added ShowRemotePlayTogetherUI() to show the Remote Play Together UI in the game overlay.
+* Added functions to get remote keyboard and mouse input directly instead of simulating local input: BEnableRemotePlayTogetherDirectInput(), DisableRemotePlayTogetherDirectInput(), GetInput(), SetMouseVisibility(), SetMousePosition(), CreateMouseCursor(), SetMouseCursor().
+
+ISteamUGC:
+* Added SetSubscriptionsLoadOrder() to allow changing the load order.
+* Added SetItemsDisabledLocally() set an item as locally disabled or not.
+* GetNumSubscribedItems() and GetSubscribedItems() also takes an optional boolean to return locally disabled items as well.
+
+
+----------------------------------------------------------------
+v1.61 8th November 2024
+----------------------------------------------------------------
+
+ISteamTimeline:
+* Renamed Set/ClearTimelineStateDescription to Set/ClearTimelineTooltip to make it more clear where the text will appear.
+* Renamed AddTimelineEvent to AddInstantaneousTimelineEvent and removed the duration parameter.
+* Added AddRangeTimelineEvent for adding a a timeline event that happens over a period of time.
+* Added Start/Update/EndRangeTimelineEvent calls for situations where the caller doesn't know when the event will end before creating it.
+* Added RemoveTimelineEvent to let the game remove an event it previously added
+* Added DoesEventRecordingExist/OpenOverlayToTimelineEvent, which allow the game to show an event in the Steam overlay
+* Added Start/EndGamePhase, along with some supporting functions, to let the game identify meaningful time ranges like multiplayer matches or chapters in a single player game. See the Timeline documentation for more information.
+
+ISteamUserStats:
+* RequestCurrentStats is no longer necessary and has been removed. The Steam Client will synchronize this data before your game launches.
+
+ISteamInput:
+* Added glyph support for the Wireless HORIPAD for Steam
+
+
+----------------------------------------------------------------
+v1.60 19th June 2024
+----------------------------------------------------------------
+
+General
+* CSteamAPIContext has been removed. Please switch to using the Steam<interface> accessors where appropriate.
+
+ISteamTimeline
+* Added this new interface to allow games to provide information that supports the new Game Recording feature. See the [url=https://partner.steamgames.com/doc/features/timeline]Timeline[/url] documentation for more information.
+
+ISteamUGC
+* Added 64 bit m_ulTotalFilesSize to SteamUGCDetails_t which is the correct size of the content for Workshop items are larger than 2,147,483,647 bytes.
+* Added GetNumSupportedGameVersions() and GetSupportedGameVersionData() which can be used to determine what game beta branches a Workshop item supports/is valid for.
+* Added SetAdminQuery() to allow ISteamUGC to be used in a tools like environment for users who have the appropriate privileges for the calling appid.
+
+ISteamApps
+* Added API to allow the game to manage active beta branches. 
+
+
+----------------------------------------------------------------
+v1.59 9th February 2024
+----------------------------------------------------------------
+General
+* Added new initialization method, SteamAPI_InitFlat
+
+ISteamUtils
+* Added DismissGamepadTextInput
+
+ISteamAppList
+* This interface has been removed from the SDK
 
 ----------------------------------------------------------------
 v1.58a 26th October 2023

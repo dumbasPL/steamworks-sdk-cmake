@@ -13,6 +13,7 @@ extern CGameEngineGL *g_engine;		// so glmgr (which is C++) can call up to the g
 
 #ifdef __clang__
 #pragma clang diagnostic warning "-Wint-to-pointer-cast"
+#pragma clang diagnostic ignored "-Wunused-variable"
 #endif
 
 #ifdef OSX
@@ -1272,6 +1273,8 @@ void	GLMContext::ResolveTex( CGLMTex *tex, bool forceDirty )
 		
 		// for resolve, only handle a modest subset of the possible formats
 		EGLMFBOAttachment	attachIndex = (EGLMFBOAttachment)0;
+		(void)attachIndex;
+
 		GLenum				attachIndexGL = 0;
 		GLuint				blitMask = 0;
 		switch( tex->m_layout->m_format->m_glDataFormat )
@@ -2823,6 +2826,9 @@ void	GLMContext::BindBufferToCtx( EGLMBufferType type, CGLMBuffer *buff, bool fo
 	
 	bool wasBound = false;
 	bool isBound = false;
+
+	(void)wasBound;
+	(void)isBound;
 	
 	if (m_lastKnownBufferBinds[type])
 	{
@@ -2879,7 +2885,6 @@ void	GLMContext::FlushDrawStates( bool shadersOn )	// shadersOn = true for draw 
 	
 	// if drawing FBO has any MSAA attachments, mark them dirty
 	{
-		CGLMTex *tex;
 		for( int att=kAttColor0; att<kAttCount; att++)
 		{
 			if (m_drawingFBO->m_attach[ att ].m_tex)
@@ -3231,6 +3236,12 @@ void	GLMContext::FlushDrawStates( bool shadersOn )	// shadersOn = true for draw 
 					#if GLMDEBUG
 						static uint paramsPushed=0,paramsSkipped=0,callsPushed=0;	// things that happened on pushed param trips
 						static uint callsSkipped=0,paramsSkippedByCallSkip=0;		// on unpushed param trips (zero dirty)
+
+						(void)paramsPushed;
+						(void)paramsSkipped;
+						(void)callsPushed;
+						(void)callsSkipped;
+						(void)paramsSkippedByCallSkip;
 					#endif
 					
 					int slotCountToPush	= 0;
@@ -3369,6 +3380,9 @@ void	GLMContext::FlushDrawStates( bool shadersOn )	// shadersOn = true for draw 
 							
 							case eAttribWriteDirty:
 								static uint hits=0,misses=0;
+								(void)hits;
+								(void)misses;
+
 								// first see if we have to do anything at all.
 								// the equality operator checks buffer name, offset, stride, datatype and normalized.
 								// we check buffer revision separately, submitter of vertex setup is not expected to provide it (zero is preferred).
@@ -3448,6 +3462,12 @@ void	GLMContext::FlushDrawStates( bool shadersOn )	// shadersOn = true for draw 
 					#if GLMDEBUG
 						static uint paramsPushed=0,paramsSkipped=0,callsPushed=0;	// things that happened on pushed param trips
 						static uint callsSkipped=0,paramsSkippedByCallSkip=0;		// on unpushed param trips (zero dirty)
+
+						(void)paramsPushed;
+						(void)paramsSkipped;
+						(void)callsPushed;
+						(void)callsSkipped;
+						(void)paramsSkippedByCallSkip;
 					#endif
 					
 					int slotCountToPush	= 0;
