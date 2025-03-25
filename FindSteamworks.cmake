@@ -1,6 +1,6 @@
 set (steamworks_SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/sdk")
 
-set (Steamworks_INCLUDE_DIR "${steamworks_SOURCE_DIR}/public/steam")
+set (Steamworks_INCLUDE_DIR "${steamworks_SOURCE_DIR}/public")
 
 if (WIN32)
 	if (CMAKE_SIZEOF_VOID_P GREATER 4)
